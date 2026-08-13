@@ -1,13 +1,12 @@
 import 'dart:io';
 
 import 'package:challenge_lab_flutter/features/auth/data/auth_service.dart';
-import 'package:challenge_lab_flutter/features/auth/presentation/widgets/account_type_card.dart';
-import 'package:challenge_lab_flutter/features/auth/presentation/widgets/auth_field.dart';
-import 'package:challenge_lab_flutter/shared/widgets/app_button.dart';
+import 'package:challenge_lab_flutter/features/auth/presentation/widgets/account_type_selector.dart';
+import 'package:challenge_lab_flutter/features/auth/presentation/widgets/profile_image_picker.dart';
+import 'package:challenge_lab_flutter/features/auth/presentation/widgets/registration_action_area.dart';
+import 'package:challenge_lab_flutter/features/auth/presentation/widgets/registration_form.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../widgets/icon_auth_field.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -26,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool _isLoading = false;
   final _firstNameController = TextEditingController();
-  final _lastNamerController = TextEditingController();
+  final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -35,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void handleRegister() async {
     final firstname = _firstNameController.text;
-    final lastName = _lastNamerController.text;
+    final lastName = _lastNameController.text;
     final email = _emailController.text;
     final username = _usernameController.text;
     final password = _passwordController.text;
@@ -103,7 +102,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
+        title: const Text(
           "Create Account",
           style: TextStyle(
             color: Color(0xff005656),
@@ -112,144 +111,40 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           textAlign: TextAlign.end,
         ),
-        backgroundColor: Color(0xffF8F9FA),
+        backgroundColor: const Color(0xffF8F9FA),
       ),
       body: ListView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         children: [
-          Column(
-            children: [
-              Center(
-                child: GestureDetector(
-                  onTap: _pickImage,
-                  child: Container(
-                    alignment: Alignment.center,
-                    height: 98,
-                    width: 98,
-                    decoration: BoxDecoration(
-                      color: Color(0xffe1e3e4),
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Color(0xffbdc9c8), width: 2),
-                      image: _image != null
-                          ? DecorationImage(
-                              image: FileImage(_image!),
-                              fit: BoxFit.cover,
-                            )
-                          : null,
-                    ),
-                    child: Icon(
-                      Icons.add_a_photo_outlined,
-                      color: Color(0xff6E7979),
-                      size: 33,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 8),
-              Text("Upload Profile Photo"),
-            ],
+          ProfileImagePicker(
+            image: _image,
+            onPickImage: _pickImage,
           ),
-          Text("First Name"),
-          AuthField(
-            controller: null,
-            hint: "Enter your First Name",
-            isTextObscured: false,
+          const SizedBox(height: 16),
+          RegistrationForm(
+            firstNameController: _firstNameController,
+            lastNameController: _lastNameController,
+            usernameController: _usernameController,
+            emailController: _emailController,
+            passwordController: _passwordController,
+            bioController: _bioController,
+            isPasswordObscured: _isPasswordObscured,
+            onTogglePasswordVisibility: () => setState(() {
+              _isPasswordObscured = !_isPasswordObscured;
+            }),
           ),
-          Text("Last Name"),
-          AuthField(
-            controller: null,
-            hint: "Enter your Last Name",
-            isTextObscured: false,
+          const SizedBox(height: 40),
+          AccountTypeSelector(
+            accountTypes: accountType,
+            selectedIndex: selectedIndex,
+            onTypeSelected: (index) => setState(() {
+              selectedIndex = index;
+            }),
           ),
-          Text("Username"),
-          IconAuthField(
-            controller: null,
-            hint: "Enter a username",
-            isTextObscured: false,
-            prefixIcon: Icon(Icons.alternate_email),
-          ),
-          Text("Email"),
-          IconAuthField(
-            controller: null,
-            hint: "Enter your Email",
-            prefixIcon: Icon(Icons.email_outlined),
-            isTextObscured: false,
-          ),
-          Text("Password"),
-          IconAuthField(
-            controller: null,
-            hint: "Enter a password",
-            prefixIcon: Icon(Icons.lock_outlined),
-            suffixIcon: IconButton(
-              onPressed: () => setState(() {
-                _isPasswordObscured = !_isPasswordObscured;
-              }),
-              icon: _isPasswordObscured
-                  ? Icon(Icons.visibility_off_outlined)
-                  : Icon(Icons.visibility_outlined),
-            ),
-            isTextObscured: _isPasswordObscured,
-          ),
-          Text("Bio"),
-          AuthField(
-            controller: null,
-            hint: "Tell us a bit about yourself",
-            isTextObscured: false,
-          ),
-          SizedBox(height: 40),
-
-          Text('Account Type'),
-          AccountTypeCard(
-            icon: Icons.person_outline_rounded,
-            title: accountType[0],
-            description: 'Solve Challenges and Build your portfolio.',
-            selected: selectedIndex == 0,
-            onTap: () {
-              setState(() {
-                selectedIndex = 0;
-              });
-            },
-          ),
-          AccountTypeCard(
-            icon: Icons.person_outline_rounded,
-            title: accountType[1],
-            description:
-                'Share expertise and solve challenges to improve your skills!',
-            selected: selectedIndex == 1,
-            onTap: () {
-              setState(() {
-                selectedIndex = 1;
-              });
-            },
-          ),
-          AccountTypeCard(
-            icon: Icons.person_outline_rounded,
-            title: accountType[2],
-            description: 'Post Challenges.',
-            selected: selectedIndex == 2,
-            onTap: () {
-              setState(() {
-                selectedIndex = 2;
-              });
-            },
-          ),
-
-          SizedBox(height: 40),
-
-          Column(
-            spacing: 8,
-            children: [
-              AppButton(
-                onPressed: handleRegister,
-                text: 'Create Account',
-                isLoading: _isLoading,
-              ),
-              Text(
-                "By creating an account, you agree to our"
-                    " Terms of Service and Privacy Policy.",
-                textAlign: TextAlign.center,
-              ),
-            ],
+          const SizedBox(height: 40),
+          RegistrationActionArea(
+            onRegister: handleRegister,
+            isLoading: _isLoading,
           ),
         ],
       ),
