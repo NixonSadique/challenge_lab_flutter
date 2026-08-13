@@ -1,4 +1,4 @@
-import 'package:challenge_lab_flutter/features/home/presentation/home_screen.dart';
+import 'package:challenge_lab_flutter/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
