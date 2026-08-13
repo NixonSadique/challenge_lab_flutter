@@ -1,4 +1,5 @@
 import 'package:challenge_lab_flutter/features/auth/presentation/screens/login_screen.dart';
+import 'package:challenge_lab_flutter/features/auth/presentation/screens/register_screen.dart';
 import 'package:challenge_lab_flutter/shared/widgets/app_button.dart';
 import 'package:challenge_lab_flutter/shared/widgets/outlined_app_button.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,11 @@ class LandingPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(height: 16),
-                  AppButton(onPressed: () {}, text: "Sign Up"),
+                  AppButton(onPressed: () {
+                    Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const RegisterScreen())
+                    );
+                  }, text: "Sign Up"),
                   SizedBox(height: 16),
                   OutlinedAppButton(
                     onPressed: () {

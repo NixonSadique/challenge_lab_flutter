@@ -54,8 +54,8 @@ class AuthService {
       requestBody,
     );
 
-    if (response.statusCode == 201) {
       var responseBody = jsonDecode(response.body);
+    if (response.statusCode == 201) {
       _client.saveTokens(
         responseBody['accessToken'],
         responseBody['refreshToken'],
@@ -65,7 +65,17 @@ class AuthService {
         "username": responseBody['username'],
       };
     } else {
-      throw Exception(response.body);
+      if (responseBody.containsKey("fields")) {
+        final fields = responseBody["fields"] as List;
+
+        final message = fields
+            .map((e) => "${e["field"]}: ${e["message"]}")
+            .join("\n");
+
+        throw Exception(message);
+      }
+
+      throw Exception(responseBody["title"]);
     }
   }
 
