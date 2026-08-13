@@ -12,14 +12,23 @@ class AuthService {
       'password': password,
     });
 
+    var body = jsonDecode(response.body);
     if (response.statusCode == 200) {
-      var body = jsonDecode(response.body);
       _client.saveTokens(body['accessToken'], body['refreshToken']);
       return;
-    } else {
-      var error = jsonDecode(response.body);
-      throw Exception('${error["message"]}');
     }
+
+    if (body.containsKey("fields")) {
+      final fields = body["fields"] as List;
+
+      final message = fields
+          .map((e) => "${e["field"]}: ${e["message"]}")
+          .join("\n");
+
+      throw Exception(message);
+    }
+
+    throw Exception(body["title"]);
   }
 
   Future<void> logout() async {

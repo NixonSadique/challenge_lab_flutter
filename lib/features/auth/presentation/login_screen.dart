@@ -11,15 +11,35 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _identifierController = TextEditingController();
   final _passwordController = TextEditingController();
-  final service = AuthService();
+  final authService = AuthService();
+  bool _isLoading = false;
 
-  void makeLogin() async {
+  void handleLogin() async {
     final identifier = _identifierController.text;
     final password = _passwordController.text;
+
+    setState(() {
+      _isLoading = true;
+    });
     try {
-      await service.login(identifier, password);
+      await authService.login(identifier, password);
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Login successful!')));
     } catch (e) {
-      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            e is Exception
+                ? e.toString().replaceFirst("Error: ", "")
+                : "An unexpected error occurred.",
+          ),
+        ),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -61,11 +81,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   textAlign: TextAlign.center,
                   obscureText: true,
                 ),
-                MaterialButton(
-                  onPressed: makeLogin,
-                  color: Colors.blue,
-                  elevation: 0,
-                  child: Text("Login"),
+                ElevatedButton(
+                  onPressed: _isLoading ? null : handleLogin,
+                  child: _isLoading
+                      ? SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : Text("Login"),
                 ),
               ],
             ),
