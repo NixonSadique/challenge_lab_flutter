@@ -23,6 +23,19 @@ class ChallengeCardHeader extends StatelessWidget {
     }
   }
 
+  Color _getDifficultyTextColor(){
+    switch (difficulty.toLowerCase()) {
+      case 'beginner':
+        return const Color(0xff137333);
+      case 'intermediate':
+        return const Color(0xff1967D2);
+      case 'advanced':
+        return const Color(0xffC5221F);
+      default:
+        return const Color(0xff000000);
+    }
+  }
+
   Color _getDifficultyBorderColor() {
     switch (difficulty.toLowerCase()) {
       case 'beginner':
@@ -67,7 +80,7 @@ class ChallengeCardHeader extends StatelessWidget {
               ),
               child: Text(
                 difficulty,
-                style: const TextStyle(color: Color(0xff5D5E61), fontSize: 12),
+                style: TextStyle(color: _getDifficultyTextColor(), fontSize: 12, fontWeight: FontWeight.bold),
               ),
             ),
           ],

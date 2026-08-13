@@ -1,4 +1,5 @@
 import 'package:challenge_lab_flutter/features/auth/data/auth_service.dart';
+import 'package:challenge_lab_flutter/features/auth/data/models/auth_models.dart';
 import 'package:challenge_lab_flutter/shared/widgets/app_button.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/auth_field.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +18,16 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isLoading = false;
 
   void handleLogin() async {
-    final identifier = _identifierController.text;
-    final password = _passwordController.text;
-
     setState(() {
       _isLoading = true;
     });
     try {
-      await authService.login(identifier, password);
+      await authService.login(
+        LoginRequest(
+          identifier: _identifierController.text,
+          password: _passwordController.text,
+        ),
+      );
       if (!mounted) return;
       ScaffoldMessenger.of(
         context,
@@ -35,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
         SnackBar(
           content: Text(
             e is Exception
-                ? e.toString().replaceFirst("Error: ", "")
+                ? e.toString().replaceFirst("Exception: ", "")
                 : "An unexpected error occurred.",
           ),
         ),
@@ -53,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Challenge Lab",
           style: TextStyle(
             color: Color(0xff005656),
@@ -61,17 +64,16 @@ class _LoginScreenState extends State<LoginScreen> {
             fontSize: 20,
           ),
         ),
-        backgroundColor: Color(0xffF8F9FA),
+        backgroundColor: const Color(0xffF8F9FA),
       ),
-
-      backgroundColor: Color(0xffffffff),
+      backgroundColor: const Color(0xffffffff),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
+              const Text(
                 "Login",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -79,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Color(0xff191C1D),
                 ),
               ),
-              Text(
+              const Text(
                 "Welcome back to ChallengeLab!",
                 style: TextStyle(
                   fontWeight: FontWeight.normal,
@@ -87,17 +89,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: Color(0xff3e4948),
                 ),
               ),
-
-              SizedBox(height: 40),
-
+              const SizedBox(height: 40),
               Container(
-                padding: EdgeInsets.all(24),
+                padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xFFE1E3E4)),
+                  border: Border.all(color: const Color(0xFFE1E3E4)),
                   borderRadius: BorderRadius.circular(12),
                   color: Colors.white,
                 ),
-
                 child: Column(
                   children: [
                     AuthField(
@@ -105,16 +104,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       hint: "Enter your Username or Email",
                       isTextObscured: false,
                     ),
-
-                    SizedBox(height: 16),
-
+                    const SizedBox(height: 16),
                     AuthField(
                       controller: _passwordController,
                       hint: "Enter your Password",
                       isTextObscured: true,
                     ),
-
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     AppButton(
                       isLoading: _isLoading,
                       onPressed: handleLogin,
@@ -123,18 +119,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Don't have an account?"),
+                  const Text("Don't have an account?"),
                   TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    child: Text(
+                    child: const Text(
                       "Sign up",
                       style: TextStyle(
                         color: Color(0xff005656),

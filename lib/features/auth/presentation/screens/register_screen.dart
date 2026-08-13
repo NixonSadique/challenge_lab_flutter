@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:challenge_lab_flutter/features/auth/data/auth_service.dart';
+import 'package:challenge_lab_flutter/features/auth/data/models/auth_models.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/account_type_selector.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/profile_image_picker.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/registration_action_area.dart';
@@ -33,25 +34,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final authService = AuthService();
 
   void handleRegister() async {
-    final firstname = _firstNameController.text;
-    final lastName = _lastNameController.text;
-    final email = _emailController.text;
-    final username = _usernameController.text;
-    final password = _passwordController.text;
-    final bio = _bioController.text;
-
-    Map<String, dynamic> request = {
-      'firstname': firstname,
-      'lastName': lastName,
-      'email': email,
-      'username': username,
-      'password': password,
-      'bio': bio,
-    };
     setState(() {
       _isLoading = true;
     });
     try {
+      final request = RegisterRequest(
+        username: _usernameController.text,
+        password: _passwordController.text,
+        email: _emailController.text,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        bio: _bioController.text,
+      );
+
       final response = await authService.register(
         request,
         accountType[selectedIndex],
@@ -60,8 +55,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            "Hello ${response['username']},"
-            " your user id is ${response['userId']}",
+            "Hello ${response.username},"
+            " your user id is ${response.userId}",
           ),
         ),
       );
@@ -71,7 +66,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         SnackBar(
           content: Text(
             e is Exception
-                ? e.toString().replaceFirst("Error: ", "")
+                ? e.toString().replaceFirst("Exception: ", "")
                 : "An unexpected error occurred.",
           ),
         ),

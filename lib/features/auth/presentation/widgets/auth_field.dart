@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 
 class AuthField extends StatelessWidget {
-  final TextEditingController? _controller;
-  final String _hint;
+  final TextEditingController? controller;
+  final String hint;
   final bool isTextObscured;
 
-  const AuthField({super.key, required this._controller, required this._hint, required this.isTextObscured});
+  const AuthField({
+    super.key,
+    required this.controller,
+    required this.hint,
+    required this.isTextObscured,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: _controller,
+      controller: controller,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        hintText: _hint,
+        hintText: hint,
       ),
       textAlign: TextAlign.center,
       obscureText: isTextObscured,
     );
   }
-
 }
