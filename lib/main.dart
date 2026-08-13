@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/features/auth/presentation/login_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: Scaffold()
+      debugShowCheckedModeBanner: false,
+      home: LoginScreen()
     );
   }
 }

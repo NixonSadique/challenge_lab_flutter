@@ -38,35 +38,35 @@ class ApiClient {
 
   Future<http.Response> post(String endpoint, Object? body) async {
     final headers = await _getAccessTokenHeader();
-    final url = Uri.parse("${AppConstants.baseUrl}+/$endpoint");
+    final url = Uri.parse("${AppConstants.baseUrl}/$endpoint");
 
     return await http.post(url, headers: headers, body: jsonEncode(body));
   }
 
   Future<http.Response> get(String endpoint) async {
     final headers = await _getAccessTokenHeader();
-    final url = Uri.parse("${AppConstants.baseUrl}+/$endpoint");
+    final url = Uri.parse("${AppConstants.baseUrl}/$endpoint");
 
     return await http.get(url, headers: headers);
   }
 
   Future<http.Response> put(String endpoint, Object? body) async {
     final headers = await _getAccessTokenHeader();
-    final url = Uri.parse("${AppConstants.baseUrl}+/$endpoint");
+    final url = Uri.parse("${AppConstants.baseUrl}/$endpoint");
 
     return await http.put(url, body: jsonEncode(body), headers: headers);
   }
 
   Future<http.Response> delete(String endpoint) async {
     final headers = await _getAccessTokenHeader();
-    final url = Uri.parse("${AppConstants.baseUrl}+/$endpoint");
+    final url = Uri.parse("${AppConstants.baseUrl}/$endpoint");
 
     return await http.delete(url, headers: headers);
   }
 
   Future<http.Response> patch(String endpoint, Object? body) async {
     final headers = await _getAccessTokenHeader();
-    final url = Uri.parse("${AppConstants.baseUrl}+/$endpoint");
+    final url = Uri.parse("${AppConstants.baseUrl}/$endpoint");
 
     return await http.patch(
       url,
