@@ -1,4 +1,4 @@
-import 'package:challenge_lab_flutter/features/auth/presentation/login_screen.dart';
+import 'package:challenge_lab_flutter/features/landing/screens/landing_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,10 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      title: 'Challenge Lab',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen()
+      home: LandingPage(),
     );
   }
 }
