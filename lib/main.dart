@@ -1,4 +1,4 @@
-import 'package:challenge_lab_flutter/features/landing/screens/landing_page.dart';
+import 'package:challenge_lab_flutter/features/home/presentation/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Challenge Lab',
       debugShowCheckedModeBanner: false,
-      home: LandingPage(),
+      home: HomeScreen(),
     );
   }
 }
