@@ -1,6 +1,8 @@
 import 'package:challenge_lab_flutter/features/home/data/home_service.dart';
 import 'package:challenge_lab_flutter/features/home/data/models/challenge_model.dart';
 import 'package:challenge_lab_flutter/features/home/data/models/user_model.dart';
+import 'package:challenge_lab_flutter/features/home/presentation/screens/admin_home_screen.dart';
+import 'package:challenge_lab_flutter/features/home/presentation/screens/user_home_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/challenge_card.dart';
@@ -60,56 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       bottomNavigationBar: const HomeBottomNavBar(),
       appBar: HomeAppBar(username: _user?.username ?? 'User'),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _errorMessage != null
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(_errorMessage!),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: _fetchData,
-                        child: const Text("Retry"),
-                      ),
-                    ],
-                  ),
-                )
-              : ListView(
-                  children: [
-                    const SizedBox(height: 32),
-                    HomeFilterSection(filters: _filters, onFilterPressed: () {}),
-                    const SizedBox(height: 16),
-                    if (_challenges.isEmpty)
-                      const Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(32.0),
-                          child: Text("No challenges found."),
-                        ),
-                      ),
-                    ..._challenges.map((challenge) {
-                      // Calculate days left
-                      final daysLeft =
-                          challenge.deadline.difference(DateTime.now()).inDays;
-                      final timeLeft = daysLeft > 0
-                          ? '$daysLeft days left'
-                          : 'Expired';
-
-                      return ChallengeCard(
-                        difficulty: challenge.difficulty,
-                        category: challenge.category,
-                        title: challenge.title,
-                        description: challenge.description,
-                        timeLeft: timeLeft,
-                        maxParticipants: challenge.maxTeamSize,
-                        onTapDetails: () {
-                          // TODO: Navigate to details
-                        },
-                      );
-                    }),
-                  ],
-                ),
+      body: AdminHomeScreen(),
     );
   }
 }

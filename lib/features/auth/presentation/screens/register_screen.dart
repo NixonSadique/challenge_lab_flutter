@@ -6,6 +6,7 @@ import 'package:challenge_lab_flutter/features/auth/presentation/widgets/account
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/profile_image_picker.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/registration_action_area.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/registration_form.dart';
+import 'package:challenge_lab_flutter/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -60,6 +61,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
         ),
       );
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -74,6 +79,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } finally {
       if (mounted) {
         setState(() {
+          _firstNameController.text = "";
+          _lastNameController.text = "";
+          _emailController.text = "";
+          _usernameController.text = "";
+          _passwordController.text = "";
+          _bioController.text = "";
           _isLoading = false;
         });
       }
@@ -111,10 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          ProfileImagePicker(
-            image: _image,
-            onPickImage: _pickImage,
-          ),
+          ProfileImagePicker(image: _image, onPickImage: _pickImage),
           const SizedBox(height: 16),
           RegistrationForm(
             firstNameController: _firstNameController,

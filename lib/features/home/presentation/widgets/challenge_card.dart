@@ -33,6 +33,7 @@ class ChallengeCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,
         children: [
           ChallengeCardHeader(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeFilterSection extends StatelessWidget {
-  final List<String> filters;
+  final List<dynamic> filters;
   final VoidCallback onFilterPressed;
 
   const HomeFilterSection({

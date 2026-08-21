@@ -27,7 +27,7 @@ class ChallengeCardFooter extends StatelessWidget {
             const SizedBox(width: 8),
             TextIcon(
               icon: Icons.people_alt_outlined,
-              text: "Max $maxParticipants",
+              text: maxParticipants > 99 ? "99+" :  "Max $maxParticipants",
             ),
           ],
         ),
