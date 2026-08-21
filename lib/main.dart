@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/features/auth/presentation/screens/login_screen.dart';
 import 'package:challenge_lab_flutter/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Challenge Lab',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LoginScreen(),
     );
   }
 }

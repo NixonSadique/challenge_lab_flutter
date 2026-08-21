@@ -1,5 +1,7 @@
 import 'package:challenge_lab_flutter/features/auth/data/auth_service.dart';
 import 'package:challenge_lab_flutter/features/auth/data/models/auth_models.dart';
+import 'package:challenge_lab_flutter/features/auth/presentation/screens/register_screen.dart';
+import 'package:challenge_lab_flutter/features/home/presentation/screens/home_screen.dart';
 import 'package:challenge_lab_flutter/shared/widgets/app_button.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/auth_field.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,10 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Login successful!')));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
+      );
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
@@ -46,6 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
     } finally {
       if (mounted) {
         setState(() {
+          _identifierController.text = "";
+          _passwordController.text = "";
           _isLoading = false;
         });
       }
@@ -125,7 +133,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 children: [
                   const Text("Don't have an account?"),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterScreen(),
+                        ),
+                      );
+                    },
                     style: TextButton.styleFrom(
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
