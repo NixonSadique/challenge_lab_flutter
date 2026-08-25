@@ -14,7 +14,6 @@ class AppButton extends StatelessWidget {
     required this.text,
     this.width,
     this.height = 50,
-
   });
 
   @override
@@ -23,25 +22,18 @@ class AppButton extends StatelessWidget {
       width: width ?? double.infinity,
       height: height,
       child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          backgroundColor: Color(0xff005656),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
-
-        ),
         onPressed: isLoading ? null : onPressed,
         child: isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 height: 20,
                 width: 20,
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
             : Text(
                 text,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  fontSize: 16,
                 ),
               ),
       ),

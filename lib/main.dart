@@ -1,6 +1,7 @@
-import 'package:challenge_lab_flutter/features/auth/presentation/screens/login_screen.dart';
-import 'package:challenge_lab_flutter/features/home/presentation/screens/home_screen.dart';
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'features/landing/screens/landing_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Challenge Lab',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      theme: AppTheme.lightTheme,
+      home: const LandingPage(),
     );
   }
 }

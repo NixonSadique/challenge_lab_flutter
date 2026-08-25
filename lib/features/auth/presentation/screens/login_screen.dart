@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:challenge_lab_flutter/features/auth/data/auth_service.dart';
 import 'package:challenge_lab_flutter/features/auth/data/models/auth_models.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/screens/register_screen.dart';
@@ -62,19 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Challenge Lab",
-          style: TextStyle(
-            color: Color(0xff005656),
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-        backgroundColor: const Color(0xffF8F9FA),
-      ),
-      backgroundColor: const Color(0xffffffff),
+      appBar: AppBar(title: const Text("Challenge Lab")),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Center(
@@ -83,27 +75,21 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const Text(
                 "Login",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Color(0xff191C1D),
-                ),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
-              const Text(
+              Text(
                 "Welcome back to ChallengeLab!",
-                style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 16,
-                  color: Color(0xff3e4948),
+                style: textTheme.bodyLarge?.copyWith(
+                  color: AppColors.onSurfaceVariant,
                 ),
               ),
               const SizedBox(height: 40),
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xFFE1E3E4)),
+                  border: Border.all(color: AppColors.surfaceVariant),
                   borderRadius: BorderRadius.circular(12),
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
                 child: Column(
                   children: [
@@ -147,10 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     child: const Text(
                       "Sign up",
-                      style: TextStyle(
-                        color: Color(0xff005656),
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

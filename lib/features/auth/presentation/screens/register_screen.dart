@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'dart:io';
 
 import 'package:challenge_lab_flutter/features/auth/data/auth_service.dart';
@@ -105,19 +106,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text(
+        title: Text(
           "Create Account",
-          style: TextStyle(
-            color: Color(0xff005656),
+          style: textTheme.headlineMedium?.copyWith(
+            color: AppColors.primary,
             fontWeight: FontWeight.bold,
-            fontSize: 20,
           ),
           textAlign: TextAlign.end,
         ),
-        backgroundColor: const Color(0xffF8F9FA),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),

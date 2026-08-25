@@ -16,13 +16,7 @@ class AuthField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        hintText: hint,
-      ),
-      textAlign: TextAlign.center,
+      decoration: InputDecoration(hintText: hint),
       obscureText: isTextObscured,
     );
   }

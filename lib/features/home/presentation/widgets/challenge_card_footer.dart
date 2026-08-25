@@ -15,31 +15,36 @@ class ChallengeCardFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            TextIcon(
-              icon: Icons.timer_outlined,
-              text: timeLeft,
-            ),
+            TextIcon(icon: Icons.timer_outlined, text: timeLeft),
             const SizedBox(width: 8),
             TextIcon(
               icon: Icons.people_alt_outlined,
-              text: maxParticipants > 99 ? "99+" :  "Max $maxParticipants",
+              text: maxParticipants > 99 ? "99+" : "Max $maxParticipants",
             ),
           ],
         ),
         GestureDetector(
           onTap: onTapDetails,
-          child: const Row(
+          child: Row(
             children: [
               Text(
                 "View Details",
-                style: TextStyle(fontWeight: FontWeight.w500),
+                style: textTheme.labelLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
-              Icon(Icons.arrow_forward, size: 16),
+              Icon(
+                Icons.arrow_forward,
+                size: 16,
+                color: Theme.of(context).colorScheme.primary,
+              ),
             ],
           ),
         ),

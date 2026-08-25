@@ -1,4 +1,6 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_status_chip.dart';
 
 class HomeFilterSection extends StatelessWidget {
   final List<dynamic> filters;
@@ -31,15 +33,11 @@ class HomeFilterSection extends StatelessWidget {
               itemBuilder: (context, i) {
                 return Container(
                   alignment: Alignment.center,
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   margin: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: const Color(0xff007070),
-                    borderRadius: BorderRadius.circular(60),
-                  ),
-                  child: Text(
-                    "$i: ${filters[i]}",
-                    style: const TextStyle(color: Color(0xff9CF0EF)),
+                  child: AppStatusChip(
+                    label: "$i: ${filters[i]}",
+                    backgroundColor: AppColors.primaryContainer,
+                    foregroundColor: AppColors.onPrimaryContainer,
                   ),
                 );
               },

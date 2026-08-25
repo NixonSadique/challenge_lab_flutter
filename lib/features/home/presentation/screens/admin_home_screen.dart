@@ -1,9 +1,11 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:challenge_lab_flutter/features/home/data/home_service.dart';
 import 'package:challenge_lab_flutter/features/home/data/models/stats_model.dart';
 import 'package:challenge_lab_flutter/features/home/data/models/user_model.dart';
 import 'package:challenge_lab_flutter/features/home/presentation/widgets/admin/admin_action_area.dart';
 import 'package:challenge_lab_flutter/features/home/presentation/widgets/admin/user_management_table.dart';
 import 'package:challenge_lab_flutter/features/home/presentation/widgets/stat_card.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_section_title.dart';
 import 'package:flutter/material.dart';
 
 class AdminHomeScreen extends StatefulWidget {
@@ -62,85 +64,77 @@ class _AdminHomeScreenState extends State<AdminHomeScreen> {
       _fetchData(); // Refresh stats
     } catch (e) {
       if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(e.toString())),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF8F9FA),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _errorMessage != null
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(_errorMessage!),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: _fetchData,
+                    child: const Text("Retry"),
+                  ),
+                ],
+              ),
+            )
+          : ListView(
+              padding: const EdgeInsets.all(16),
+              children: [
+                const AppSectionTitle("Overview"),
+                const SizedBox(height: 16),
+                SizedBox(
+                  height: 100,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
                     children: [
-                      Text(_errorMessage!),
-                      const SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: _fetchData,
-                        child: const Text("Retry"),
+                      StatCard(
+                        amount: _stats?.totalUsers.toString() ?? '0',
+                        text: "Total Users",
+                        icon: Icons.person_rounded,
+                      ),
+                      StatCard(
+                        amount: _stats?.totalChallenges.toString() ?? '0',
+                        text: "Challenges",
+                        icon: Icons.workspace_premium_rounded,
+                      ),
+                      StatCard(
+                        amount: _stats?.activeChallenges.toString() ?? '0',
+                        text: "Active",
+                        icon: Icons.bolt_rounded,
+                        amountColor: AppColors.tertiary,
+                      ),
+                      StatCard(
+                        amount: _stats?.totalSubmissions.toString() ?? '0',
+                        text: "Submissions",
+                        icon: Icons.send_rounded,
+                      ),
+                      StatCard(
+                        amount: _stats?.totalRatings.toString() ?? '0',
+                        text: "Ratings",
+                        icon: Icons.star_rounded,
                       ),
                     ],
                   ),
-                )
-              : ListView(
-                  padding: const EdgeInsets.all(16),
-                  children: [
-                    const Text(
-                      "Overview",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xff191C1D),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      height: 100,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          StatCard(
-                            amount: _stats?.totalUsers.toString() ?? '0',
-                            text: "Total Users",
-                            icon: Icons.person_rounded,
-                          ),
-                          StatCard(
-                            amount: _stats?.totalChallenges.toString() ?? '0',
-                            text: "Challenges",
-                            icon: Icons.workspace_premium_rounded,
-                          ),
-                          StatCard(
-                            amount: _stats?.activeChallenges.toString() ?? '0',
-                            text: "Active",
-                            icon: Icons.bolt_rounded,
-                            amountColor: const Color(0xff634800),
-                          ),
-                          StatCard(
-                            amount: _stats?.totalSubmissions.toString() ?? '0',
-                            text: "Submissions",
-                            icon: Icons.send_rounded,
-                          ),
-                          StatCard(
-                            amount: _stats?.totalRatings.toString() ?? '0',
-                            text: "Ratings",
-                            icon: Icons.star_rounded,
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    UserManagementTable(users: _users),
-                    const SizedBox(height: 40),
-                    AdminActionArea(onBulkClose: _handleBulkClose),
-                    const SizedBox(height: 80), // Space for bottom nav
-                  ],
                 ),
+                const SizedBox(height: 40),
+                UserManagementTable(users: _users),
+                const SizedBox(height: 40),
+                AdminActionArea(onBulkClose: _handleBulkClose),
+                const SizedBox(height: 80), // Space for bottom nav
+              ],
+            ),
     );
   }
 }

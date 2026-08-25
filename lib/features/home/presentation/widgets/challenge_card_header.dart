@@ -1,4 +1,6 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_status_chip.dart';
 
 class ChallengeCardHeader extends StatelessWidget {
   final String category;
@@ -13,39 +15,39 @@ class ChallengeCardHeader extends StatelessWidget {
   Color _getDifficultyColor() {
     switch (difficulty.toLowerCase()) {
       case 'beginner':
-        return const Color(0xffE6F4EA);
+        return AppColors.difficultyBeginnerBg;
       case 'intermediate':
-        return const Color(0xffE8F0FE);
+        return AppColors.difficultyIntermediateBg;
       case 'advanced':
-        return const Color(0xffFCE8E6);
+        return AppColors.difficultyAdvancedBg;
       default:
-        return const Color(0xffE1E3E4);
+        return AppColors.surfaceVariant;
     }
   }
 
-  Color _getDifficultyTextColor(){
+  Color _getDifficultyTextColor() {
     switch (difficulty.toLowerCase()) {
       case 'beginner':
-        return const Color(0xff137333);
+        return AppColors.difficultyBeginnerFg;
       case 'intermediate':
-        return const Color(0xff1967D2);
+        return AppColors.difficultyIntermediateFg;
       case 'advanced':
-        return const Color(0xffC5221F);
+        return AppColors.difficultyAdvancedFg;
       default:
-        return const Color(0xff000000);
+        return AppColors.onSurface;
     }
   }
 
   Color _getDifficultyBorderColor() {
     switch (difficulty.toLowerCase()) {
       case 'beginner':
-        return const Color(0xffCEEAD6);
+        return AppColors.difficultyBeginnerBorder;
       case 'intermediate':
-        return const Color(0xffD2E3FC);
+        return AppColors.difficultyIntermediateBorder;
       case 'advanced':
-        return const Color(0xffFAD2CF);
+        return AppColors.difficultyAdvancedBorder;
       default:
-        return const Color(0xffd1d1d1);
+        return AppColors.surfaceVariant;
     }
   }
 
@@ -56,32 +58,18 @@ class ChallengeCardHeader extends StatelessWidget {
       children: [
         Row(
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                color: const Color(0xffE7E8E9),
-                borderRadius: BorderRadius.circular(6),
-              ),
-              child: Text(
-                category,
-                style: const TextStyle(color: Color(0xff5D5E61), fontSize: 12),
-              ),
+            AppStatusChip(
+              label: category,
+              backgroundColor: AppColors.surfaceContainerHigh,
+              foregroundColor: AppColors.secondary,
             ),
             const SizedBox(width: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              decoration: BoxDecoration(
-                color: _getDifficultyColor(),
-                borderRadius: BorderRadius.circular(6),
-                border: Border.all(
-                  color: _getDifficultyBorderColor(),
-                  width: 2,
-                ),
-              ),
-              child: Text(
-                difficulty,
-                style: TextStyle(color: _getDifficultyTextColor(), fontSize: 12, fontWeight: FontWeight.bold),
-              ),
+            AppStatusChip(
+              label: difficulty,
+              backgroundColor: _getDifficultyColor(),
+              foregroundColor: _getDifficultyTextColor(),
+              borderColor: _getDifficultyBorderColor(),
+              bold: true,
             ),
           ],
         ),

@@ -15,10 +15,13 @@ class AccountTypeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Account Type'),
+        Text('Account Type', style: textTheme.labelLarge),
+        const SizedBox(height: 8),
         AccountTypeCard(
           icon: Icons.person_outline_rounded,
           title: accountTypes[0],
@@ -29,7 +32,8 @@ class AccountTypeSelector extends StatelessWidget {
         AccountTypeCard(
           icon: Icons.person_outline_rounded,
           title: accountTypes[1],
-          description: 'Share expertise and solve challenges to improve your skills!',
+          description:
+              'Share expertise and solve challenges to improve your skills!',
           selected: selectedIndex == 1,
           onTap: () => onTypeSelected(1),
         ),

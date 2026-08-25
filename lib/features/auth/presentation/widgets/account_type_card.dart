@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class AccountTypeCard extends StatelessWidget {
@@ -25,11 +26,11 @@ class AccountTypeCard extends StatelessWidget {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: selected
-              ? const Color(0xff007070).withAlpha(90)
+              ? AppColors.primaryContainer.withAlpha(80)
               : Colors.white,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: selected ? const Color(0xff005656) : const Color(0xffc5cece),
+            color: selected ? AppColors.primary : AppColors.outlineVariant,
             width: 2,
           ),
         ),
@@ -37,20 +38,20 @@ class AccountTypeCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Icon(icon, size: 18, color: const Color(0xff6E7979)),
+                Icon(icon, size: 18, color: AppColors.outline),
+                const SizedBox(width: 8),
                 Text(
                   title,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff191C1D),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
               ],
             ),
+            const SizedBox(height: 8),
             Text(
               description,
-              style: const TextStyle(fontSize: 15, color: Color(0xff5D5E61)),
+              style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.left,
             ),
           ],

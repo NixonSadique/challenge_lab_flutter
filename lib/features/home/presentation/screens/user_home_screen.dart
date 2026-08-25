@@ -23,6 +23,8 @@ class UserHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return isLoading
         ? const Center(child: CircularProgressIndicator())
         : errorMessage != null
@@ -45,10 +47,13 @@ class UserHomeScreen extends StatelessWidget {
               HomeFilterSection(filters: filters, onFilterPressed: () {}),
               const SizedBox(height: 16),
               if (challenges.isEmpty)
-                const Center(
+                Center(
                   child: Padding(
-                    padding: EdgeInsets.all(32.0),
-                    child: Text("No challenges found."),
+                    padding: const EdgeInsets.all(32.0),
+                    child: Text(
+                      "No challenges found.",
+                      style: textTheme.bodyLarge,
+                    ),
                   ),
                 ),
               ...challenges.map((challenge) {

@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 
@@ -23,9 +24,9 @@ class ProfileImagePicker extends StatelessWidget {
               height: 98,
               width: 98,
               decoration: BoxDecoration(
-                color: const Color(0xffe1e3e4),
+                color: AppColors.surfaceVariant,
                 shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xffbdc9c8), width: 2),
+                border: Border.all(color: AppColors.outlineVariant, width: 2),
                 image: image != null
                     ? DecorationImage(
                         image: FileImage(image!),
@@ -35,14 +36,17 @@ class ProfileImagePicker extends StatelessWidget {
               ),
               child: const Icon(
                 Icons.add_a_photo_outlined,
-                color: Color(0xff6E7979),
+                color: AppColors.outline,
                 size: 33,
               ),
             ),
           ),
         ),
         const SizedBox(height: 8),
-        const Text("Upload Profile Photo"),
+        Text(
+          "Upload Profile Photo",
+          style: Theme.of(context).textTheme.labelMedium,
+        ),
       ],
     );
   }

@@ -14,12 +14,14 @@ class TextIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme.onSurfaceVariant;
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 20),
+        Icon(icon, size: 20, color: color),
         SizedBox(width: spacing),
-        Text(text),
+        Text(text, style: Theme.of(context).textTheme.bodyMedium),
       ],
     );
   }

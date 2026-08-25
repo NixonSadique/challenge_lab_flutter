@@ -21,27 +21,18 @@ class OutlinedAppButton extends StatelessWidget {
     return SizedBox(
       width: width ?? double.infinity,
       height: height,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Color(0xff6E7979), width: 1),
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
+      child: OutlinedButton(
         onPressed: isLoading ? null : onPressed,
         child: isLoading
-            ? SizedBox(
+            ? const SizedBox(
                 height: 20,
                 width: 20,
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
             : Text(
                 text,
-                style: TextStyle(
-                  color: Color(0xff191C1D),
-                  fontWeight: FontWeight.w600,
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontSize: 16,
                 ),
               ),

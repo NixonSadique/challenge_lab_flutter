@@ -21,12 +21,10 @@ class IconAuthField extends StatelessWidget {
     return TextField(
       controller: controller,
       decoration: InputDecoration(
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         hintText: hint,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
       ),
-      textAlign: TextAlign.center,
       obscureText: isTextObscured,
     );
   }

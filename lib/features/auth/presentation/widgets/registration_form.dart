@@ -26,36 +26,42 @@ class RegistrationForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("First Name"),
+        Text("First Name", style: textTheme.labelLarge),
         AuthField(
           controller: firstNameController,
           hint: "Enter your First Name",
           isTextObscured: false,
         ),
-        const Text("Last Name"),
+        const SizedBox(height: 8),
+        Text("Last Name", style: textTheme.labelLarge),
         AuthField(
           controller: lastNameController,
           hint: "Enter your Last Name",
           isTextObscured: false,
         ),
-        const Text("Username"),
+        const SizedBox(height: 8),
+        Text("Username", style: textTheme.labelLarge),
         IconAuthField(
           controller: usernameController,
           hint: "Enter a username",
           isTextObscured: false,
           prefixIcon: const Icon(Icons.alternate_email),
         ),
-        const Text("Email"),
+        const SizedBox(height: 8),
+        Text("Email", style: textTheme.labelLarge),
         IconAuthField(
           controller: emailController,
           hint: "Enter your Email",
           prefixIcon: const Icon(Icons.email_outlined),
           isTextObscured: false,
         ),
-        const Text("Password"),
+        const SizedBox(height: 8),
+        Text("Password", style: textTheme.labelLarge),
         IconAuthField(
           controller: passwordController,
           hint: "Enter a password",
@@ -68,7 +74,8 @@ class RegistrationForm extends StatelessWidget {
           ),
           isTextObscured: isPasswordObscured,
         ),
-        const Text("Bio"),
+        const SizedBox(height: 8),
+        Text("Bio", style: textTheme.labelLarge),
         AuthField(
           controller: bioController,
           hint: "Tell us a bit about yourself",

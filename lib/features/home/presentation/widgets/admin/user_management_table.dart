@@ -1,4 +1,7 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_card_surface.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_status_chip.dart';
 import '../../../data/models/user_model.dart';
 
 class UserManagementTable extends StatelessWidget {
@@ -13,18 +16,10 @@ class UserManagementTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            offset: const Offset(0, 4),
-            blurRadius: 20,
-          ),
-        ],
-      ),
+    return AppCardSurface(
+      showBorder: false,
+      showShadow: true,
+      radius: 8,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,13 +28,9 @@ class UserManagementTable extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   "User Management",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xff191C1D),
-                  ),
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 16),
                 Row(
@@ -50,16 +41,22 @@ class UserManagementTable extends StatelessWidget {
                           hintText: "Search users...",
                           prefixIcon: const Icon(Icons.search, size: 20),
                           filled: true,
-                          fillColor: const Color(0xffF8F9FA),
+                          fillColor: AppColors.background,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Color(0xffBDC9C8)),
+                            borderSide: const BorderSide(
+                              color: AppColors.outlineVariant,
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Color(0xffBDC9C8)),
+                            borderSide: const BorderSide(
+                              color: AppColors.outlineVariant,
+                            ),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                          contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                          ),
                         ),
                       ),
                     ),
@@ -67,10 +64,13 @@ class UserManagementTable extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        border: Border.all(color: const Color(0xffBDC9C8)),
+                        border: Border.all(color: AppColors.outlineVariant),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: const Icon(Icons.filter_list, color: Color(0xff5D5E61)),
+                      child: const Icon(
+                        Icons.filter_list,
+                        color: AppColors.secondary,
+                      ),
                     ),
                   ],
                 ),
@@ -80,70 +80,73 @@ class UserManagementTable extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: DataTable(
-              headingRowColor: WidgetStateProperty.all(const Color(0xffF3F4F5)),
-              columns: const [
+              headingRowColor: WidgetStateProperty.all(
+                AppColors.surfaceContainer,
+              ),
+              columns: [
                 DataColumn(
                   label: Text(
                     "USER",
-                    style: TextStyle(
-                      fontSize: 12,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: AppColors.onSurfaceVariant,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xff3E4948),
                     ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     "ROLE",
-                    style: TextStyle(
-                      fontSize: 12,
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: AppColors.onSurfaceVariant,
                       fontWeight: FontWeight.w600,
-                      color: Color(0xff3E4948),
                     ),
                   ),
                 ),
               ],
               rows: users.map((user) {
-                return DataRow(cells: [
-                  DataCell(
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          radius: 16,
-                          backgroundColor: const Color(0xffEDEEEF),
-                          backgroundImage: user.avatarUrl != null
-                              ? NetworkImage(user.avatarUrl!)
-                              : null,
-                          child: user.avatarUrl == null
-                              ? Text(user.firstName[0])
-                              : null,
-                        ),
-                        const SizedBox(width: 8),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${user.firstName} ${user.lastName}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14,
+                return DataRow(
+                  cells: [
+                    DataCell(
+                      Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 16,
+                            backgroundColor: AppColors.surfaceContainer,
+                            backgroundImage: user.avatarUrl != null
+                                ? NetworkImage(user.avatarUrl!)
+                                : null,
+                            child: user.avatarUrl == null
+                                ? Text(user.firstName[0])
+                                : null,
+                          ),
+                          const SizedBox(width: 8),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${user.firstName} ${user.lastName}",
+                                style: Theme.of(context).textTheme.bodyMedium
+                                    ?.copyWith(
+                                      color: AppColors.onSurface,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                               ),
-                            ),
-                            Text(
-                              user.email,
-                              style: const TextStyle(
-                                color: Color(0xff3E4948),
-                                fontSize: 12,
+                              Text(
+                                user.email,
+                                style: Theme.of(context).textTheme.labelMedium
+                                    ?.copyWith(
+                                      color: AppColors.onSurfaceVariant,
+                                    ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  DataCell(_RoleBadge(role: user.role)),
-                ]);
+                    DataCell(_RoleBadge(role: user.role)),
+                  ],
+                );
               }).toList(),
             ),
           ),
@@ -154,7 +157,9 @@ class UserManagementTable extends StatelessWidget {
               children: [
                 Text(
                   "Showing 1-${users.length} of ${users.length}",
-                  style: const TextStyle(color: Color(0xff3E4948), fontSize: 14),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.onSurfaceVariant,
+                  ),
                 ),
                 Row(
                   children: [
@@ -188,36 +193,26 @@ class _RoleBadge extends StatelessWidget {
 
     switch (role.toUpperCase()) {
       case 'ADMIN':
-        bgColor = const Color(0xffBA1A1A).withOpacity(0.1);
-        textColor = const Color(0xffBA1A1A);
+        bgColor = AppColors.error.withValues(alpha: 0.1);
+        textColor = AppColors.error;
         break;
       case 'COMPANY':
-        bgColor = const Color(0xff005656).withOpacity(0.05);
-        textColor = const Color(0xff005656);
+        bgColor = AppColors.primary.withValues(alpha: 0.05);
+        textColor = AppColors.primary;
         break;
       case 'PROFESSIONAL':
-        bgColor = const Color(0xffE2E2E5);
-        textColor = const Color(0xff636467);
+        bgColor = const Color(0xFFE2E2E5);
+        textColor = const Color(0xFF636467);
         break;
       default:
-        bgColor = const Color(0xffE7E8E9);
-        textColor = const Color(0xff5D5E61);
+        bgColor = AppColors.surfaceContainerHigh;
+        textColor = AppColors.secondary;
     }
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Text(
-        role[0] + role.substring(1).toLowerCase(),
-        style: TextStyle(
-          color: textColor,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+    return AppStatusChip(
+      label: role[0] + role.substring(1).toLowerCase(),
+      backgroundColor: bgColor,
+      foregroundColor: textColor,
     );
   }
 }

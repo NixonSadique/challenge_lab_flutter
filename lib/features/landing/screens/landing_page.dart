@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/screens/login_screen.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/screens/register_screen.dart';
 import 'package:challenge_lab_flutter/shared/widgets/app_button.dart';
@@ -9,6 +10,8 @@ class LandingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
@@ -20,7 +23,7 @@ class LandingPage extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.white.withAlpha(10), Colors.white],
+                colors: [Colors.white.withAlpha(10), AppColors.surface],
               ),
             ),
           ),
@@ -28,10 +31,10 @@ class LandingPage extends StatelessWidget {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-              padding: EdgeInsets.all(24),
+              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+              padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Column(
@@ -43,14 +46,13 @@ class LandingPage extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.science_rounded,
-                        color: Color(0xff005656),
+                        color: AppColors.primary,
                         size: 27,
                       ),
                       Text(
                         "Challenge Lab",
-                        style: TextStyle(
-                          color: Color(0xff191C1D),
-                          fontSize: 20,
+                        style: textTheme.headlineMedium?.copyWith(
+                          color: AppColors.onSurface,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -58,33 +60,39 @@ class LandingPage extends StatelessWidget {
                   ),
                   Text(
                     "Solve Real Challenges.",
-                    style: TextStyle(
+                    style: textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Color(0xff191C1D),
+                      color: AppColors.onSurface,
                     ),
                   ),
                   Text(
                     "Build your Future.",
-                    style: TextStyle(
+                    style: textTheme.headlineLarge?.copyWith(
                       fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      color: Color(0xff005656),
+                      color: AppColors.primary,
                     ),
                   ),
                   Text(
                     "Join a community of forward-thinkers and "
                     "tackle complex problems head-on.",
-                    style: TextStyle(color: Color(0xff3E4948), fontSize: 16),
+                    style: textTheme.bodyLarge?.copyWith(
+                      color: AppColors.onSurfaceVariant,
+                    ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 16),
-                  AppButton(onPressed: () {
-                    Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const RegisterScreen())
-                    );
-                  }, text: "Sign Up"),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
+                  AppButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RegisterScreen(),
+                        ),
+                      );
+                    },
+                    text: "Sign Up",
+                  ),
+                  const SizedBox(height: 16),
                   OutlinedAppButton(
                     onPressed: () {
                       Navigator.push(

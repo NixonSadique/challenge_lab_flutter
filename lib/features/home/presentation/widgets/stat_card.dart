@@ -1,4 +1,6 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_card_surface.dart';
 
 class StatCard extends StatelessWidget {
   final String text;
@@ -18,46 +20,36 @@ class StatCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 160,
-      padding: const EdgeInsets.all(16),
       margin: const EdgeInsets.only(right: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            offset: const Offset(0, 4),
-            blurRadius: 20,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(icon, size: 16, color: const Color(0xff5D5E61)),
-              const SizedBox(width: 8),
-              Text(
-                text,
-                style: const TextStyle(
-                  color: Color(0xff5D5E61),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
+      child: AppCardSurface(
+        showBorder: false,
+        showShadow: true,
+        radius: 8,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(icon, size: 16, color: AppColors.secondary),
+                const SizedBox(width: 8),
+                Text(
+                  text,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.labelMedium?.copyWith(color: AppColors.secondary),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            amount,
-            style: TextStyle(
-              color: amountColor ?? const Color(0xff005656),
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
+              ],
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            Text(
+              amount,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                color: amountColor ?? AppColors.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

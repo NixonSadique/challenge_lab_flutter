@@ -1,3 +1,4 @@
+import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,32 +14,24 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         margin: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          border: Border.all(color: const Color(0xffbdc9c8), width: 2),
+          border: Border.all(color: AppColors.outlineVariant, width: 2),
         ),
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Challenge Lab",
-            style: TextStyle(
-              color: Color(0xff005656),
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
+          const Text("Challenge Lab"),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
-              color: const Color(0xffFFDFA0),
+              color: const Color(0xFFFFDFA0),
               borderRadius: BorderRadius.circular(50),
             ),
             child: Text(
               username.startsWith('@') ? username : '@$username',
-              style: const TextStyle(
-                color: Color(0xff261A00),
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                color: const Color(0xFF261A00),
                 fontWeight: FontWeight.bold,
-                fontSize: 14,
               ),
             ),
           ),
