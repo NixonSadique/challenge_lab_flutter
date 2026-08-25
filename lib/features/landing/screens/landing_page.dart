@@ -2,6 +2,7 @@ import 'package:challenge_lab_flutter/core/theme/app_theme.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/screens/login_screen.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/screens/register_screen.dart';
 import 'package:challenge_lab_flutter/shared/widgets/app_button.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_card_surface.dart';
 import 'package:challenge_lab_flutter/shared/widgets/outlined_app_button.dart';
 import 'package:flutter/material.dart';
 
@@ -23,20 +24,16 @@ class LandingPage extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.white.withAlpha(10), AppColors.surface],
+                colors: [Colors.white.withValues(alpha: 0.1), AppColors.surface],
               ),
             ),
           ),
 
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
+            child: AppCardSurface(
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
               padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: BorderRadius.circular(12),
-              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +41,7 @@ class LandingPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.science_rounded,
                         color: AppColors.primary,
                         size: 27,

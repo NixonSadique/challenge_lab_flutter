@@ -201,8 +201,8 @@ class _RoleBadge extends StatelessWidget {
         textColor = AppColors.primary;
         break;
       case 'PROFESSIONAL':
-        bgColor = const Color(0xFFE2E2E5);
-        textColor = const Color(0xFF636467);
+        bgColor = AppColors.roleProfessionalBg;
+        textColor = AppColors.roleProfessionalFg;
         break;
       default:
         bgColor = AppColors.surfaceContainerHigh;

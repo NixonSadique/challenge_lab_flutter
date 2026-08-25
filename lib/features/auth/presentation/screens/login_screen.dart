@@ -5,6 +5,8 @@ import 'package:challenge_lab_flutter/features/auth/presentation/screens/registe
 import 'package:challenge_lab_flutter/features/home/presentation/screens/home_screen.dart';
 import 'package:challenge_lab_flutter/shared/widgets/app_button.dart';
 import 'package:challenge_lab_flutter/features/auth/presentation/widgets/auth_field.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_card_surface.dart';
+import 'package:challenge_lab_flutter/shared/widgets/app_section_title.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -73,10 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
-                "Login",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-              ),
+              const AppSectionTitle("Login"),
               Text(
                 "Welcome back to ChallengeLab!",
                 style: textTheme.bodyLarge?.copyWith(
@@ -84,13 +83,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 40),
-              Container(
+              AppCardSurface(
                 padding: const EdgeInsets.all(24),
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.surfaceVariant),
-                  borderRadius: BorderRadius.circular(12),
-                  color: Theme.of(context).colorScheme.surface,
-                ),
                 child: Column(
                   children: [
                     AuthField(
@@ -131,9 +125,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       minimumSize: Size.zero,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    child: const Text(
+                    child: Text(
                       "Sign up",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ),
                 ],

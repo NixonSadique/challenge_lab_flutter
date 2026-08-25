@@ -51,6 +51,9 @@ class AppColors {
   static const Color difficultyAdvancedBg = Color(0xFFFCE8E6);
   static const Color difficultyAdvancedFg = Color(0xFFC5221F);
   static const Color difficultyAdvancedBorder = Color(0xFFFAD2CF);
+
+  static const Color roleProfessionalBg = Color(0xFFE2E2E5);
+  static const Color roleProfessionalFg = Color(0xFF636467);
 }
 
 class AppTheme {

@@ -24,13 +24,13 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
             decoration: BoxDecoration(
-              color: const Color(0xFFFFDFA0),
+              color: AppColors.winnerAccentSoft,
               borderRadius: BorderRadius.circular(50),
             ),
             child: Text(
               username.startsWith('@') ? username : '@$username',
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: const Color(0xFF261A00),
+                color: AppColors.onTertiary,
                 fontWeight: FontWeight.bold,
               ),
             ),

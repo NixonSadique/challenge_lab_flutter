@@ -39,7 +39,7 @@ class AdminActionArea extends StatelessWidget {
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,
-              foregroundColor: Colors.white,
+              foregroundColor: AppColors.onPrimary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -65,7 +65,7 @@ class AdminActionArea extends StatelessWidget {
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.error,
-              foregroundColor: Colors.white,
+              foregroundColor: AppColors.onPrimary,
               padding: const EdgeInsets.symmetric(vertical: 16),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
@@ -81,13 +81,13 @@ class AdminActionArea extends StatelessWidget {
                     height: 20,
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
-                      color: Colors.white,
+                      color: AppColors.onPrimary,
                     ),
                   )
                 : const Icon(Icons.gavel_rounded),
-            label: const Text(
+            label: Text(
               "Close Expired Challenges",
-              style: TextStyle(fontWeight: FontWeight.w600),
+              style: Theme.of(context).textTheme.labelLarge,
             ),
           ),
         ),
